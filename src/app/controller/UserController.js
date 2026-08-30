@@ -1,9 +1,38 @@
+import bcrypt from 'bcrypt';
 import { v4 } from 'uuid';
+import * as Yup from 'yup';
 import User from '../models/User.js';
 
 class UserController {
 	async store(request, response) {
-		const { name, email, password_hash, admin } = request.body;
+		const schema = Yup.object({
+			name: Yup.string().required(),
+			email: Yup.string().email().required(),
+			password: Yup.string().min(6),
+			admin: Yup.boolean(),
+		});
+
+		try {
+			schema.validateSync(request.body, { abortEarly: false, strict: true });
+		} catch (err) {
+			response.status(400).json({ erro: err.errors });
+		}
+
+		const { name, email, password, admin } = request.body;
+
+		const existingUser = await User.findOne({
+			where: {
+				email,
+			},
+		});
+
+		if (existingUser) {
+			return response
+				.status(400)
+				.json({ message: 'This email is already registered!' });
+		}
+
+		const password_hash = bcrypt.hash(password, 10);
 
 		const user = await User.create({
 			id: v4(),
