@@ -6,7 +6,7 @@ class SessionController {
 	async store(request, response) {
 		const schema = Yup.object({
 			email: Yup.string().email().required(),
-			password: Yup.string().required(),
+			password: Yup.string().min(6).required(),
 		});
 
 		const isValid = await schema.isValid(request.body, { strict: true });
@@ -14,9 +14,9 @@ class SessionController {
 		const emailOrPasswordIncorrect = () => {
 			response.status(400).json({ error: 'Email or password inscorrect' });
 		};
-		
+
 		if (!isValid) {
-			emailOrPasswordIncorrect()
+			emailOrPasswordIncorrect();
 		}
 
 		const { email, password } = request.body;
@@ -28,7 +28,7 @@ class SessionController {
 		});
 
 		if (!existingUser) {
-			emailOrPasswordIncorrect()
+			emailOrPasswordIncorrect();
 		}
 
 		const isPsswordCorrenct = await bcrypt.compare(
@@ -37,7 +37,7 @@ class SessionController {
 		);
 
 		if (!isPsswordCorrenct) {
-			emailOrPasswordIncorrect()
+			emailOrPasswordIncorrect();
 		}
 
 		return response.status(201).json({

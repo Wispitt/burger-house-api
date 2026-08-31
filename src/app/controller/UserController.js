@@ -32,7 +32,7 @@ class UserController {
 				.json({ message: 'This email is already registered!' });
 		}
 
-		const password_hash = bcrypt.hash(password, 10);
+		const password_hash = await bcrypt.hash(password, 10);
 
 		const user = await User.create({
 			id: v4(),
