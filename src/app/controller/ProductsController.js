@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import Product from '../models/Product.js';
 
 class ProductsController {
 	async store(request, response) {
@@ -8,18 +9,29 @@ class ProductsController {
 			category: Yup.string().required(),
 		});
 
-		const product = {
-			...request.body,
-			image: request.file ? request.file.filename : null,
-		};
-
 		try {
 			schema.validateSync(request.body, { abortEarly: false });
 		} catch (err) {
 			return response.status(400).json({ erro: err.errors });
 		}
 
-		return response.status(201).json({ product });
+		const { name, price, category } = request.body;
+		const { filename } = request.file;
+
+		const newProduct = await Product.create({
+			name,
+			price,
+			category,
+			path: filename,
+		});
+
+		return response.status(201).json(newProduct);
+	}
+
+	async index(_request, response) {
+		const products = await Product.findAll();
+
+		return response.status(200).json(products);
 	}
 }
 

@@ -13,9 +13,11 @@
 	},
 	"linter": {
 		"enabled": true,
-		"noThisInStatic": "off",
 		"rules": {
-			"preset": "recommended"
+			"preset": "recommended",
+			"complexity": {
+				"noThisInStatic": "off"
+			}
 		}
 	},
 	"javascript": {
