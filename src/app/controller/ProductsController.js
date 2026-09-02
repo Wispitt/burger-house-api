@@ -12,7 +12,7 @@ class ProductsController {
 		try {
 			schema.validateSync(request.body, { abortEarly: false });
 		} catch (err) {
-			return response.status(400).json({ erro: err.errors });
+			return response.status(400).json({ error: err.errors });
 		}
 
 		const { name, price, category } = request.body;

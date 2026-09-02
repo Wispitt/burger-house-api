@@ -16,7 +16,8 @@
 		"rules": {
 			"preset": "recommended",
 			"complexity": {
-				"noThisInStatic": "off"
+				"noThisInStatic": "off",
+				"useOptionalChain": "off"
 			}
 		}
 	},
@@ -29,7 +30,7 @@
 		"enabled": true,
 		"actions": {
 			"source": {
-				"organizeImports": "on"
+				"organizeImports": "off"
 			}
 		}
 	}

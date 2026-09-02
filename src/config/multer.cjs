@@ -6,7 +6,7 @@ module.exports = {
 	storage: multer.diskStorage({
 		destination: resolve(__dirname, '..', '..', 'uploads'),
 		filename: (_request, file, callback) => {
-			const uniqueName = v4().concat(`-${file.originalname}`);
+			const uniqueName = v4().concat(`${file.originalname}`);
 			return callback(null, uniqueName);
 		},
 	}),
