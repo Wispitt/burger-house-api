@@ -35,7 +35,6 @@ routes.put(
 	ProductsController.update,
 );
 
-
 routes.post(
 	'/categories',
 	adminMiddleware,

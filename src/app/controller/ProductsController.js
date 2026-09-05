@@ -40,7 +40,7 @@ class ProductsController {
 		});
 
 		try {
-			schema.validateSync(request.body, { abortEarly: false });
+			schema.validateSync(request.body, { abortEarly: false, strict: true });
 		} catch (err) {
 			return response.status(400).json({ error: err.errors });
 		}

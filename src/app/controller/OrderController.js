@@ -27,7 +27,7 @@ class OrderController {
 
 		const productsIds = products.map((product) => product.id);
 
-		const fidedProducts = await Product.findAll({
+		const foundProducts = await Product.findAll({
 			where: {
 				id: productsIds,
 			},
@@ -38,7 +38,7 @@ class OrderController {
 			},
 		});
 
-		const mapedProducts = fidedProducts.map((product) => {
+		const mappedProducts = foundProducts.map((product) => {
 			const quantity = products.find((p) => p.id === product.id).quantity;
 
 			const newProduct = {
@@ -58,7 +58,7 @@ class OrderController {
 				id: userId,
 				name: userName,
 			},
-			products: mapedProducts,
+			products: mappedProducts,
 			status: 'Pedido realizado',
 		};
 
@@ -87,14 +87,16 @@ class OrderController {
 			return response.status(400).json({ error: err.message });
 		}
 
-		return response.status(200).json({ message: 'Status updated successufully' });
+		return response
+			.status(200)
+			.json({ message: 'Status updated successfully' });
 	}
 
-    async index(_request, response) {
-        const orders = await Order.find()
+	async index(_request, response) {
+		const orders = await Order.find();
 
-        return response.status(200).json(orders)
-    }
+		return response.status(200).json(orders);
+	}
 }
 
 export default new OrderController();
