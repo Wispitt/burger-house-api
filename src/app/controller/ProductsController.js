@@ -12,14 +12,14 @@ class ProductsController {
 		});
 
 		try {
-			schema.validateSync(request.body, { abortEarly: false });
+			schema.validateSync(request.body, { abortEarly: false, strict: false });
 		} catch (err) {
 			return response.status(400).json({ error: err.errors });
 		}
 
 		const { name, price, category_id, offer } = request.body;
 		const { filename } = request.file;
-		console.log(request.body)
+		
 		const newProduct = await Product.create({
 			name,
 			price,
@@ -27,7 +27,7 @@ class ProductsController {
 			path: filename,
 			offer,
 		});
-
+		
 		return response.status(201).json(newProduct);
 	}
 

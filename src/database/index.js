@@ -31,31 +31,4 @@ class Database {
 
 export default new Database();
 
-//   {
-//     name: "Milk Shake",
-//     price: 1690,
-//     category_id: 5,
-//     offer: true,
-//     file: './src/data/assets/milk-shake.png',
-//   },
-//   {
-//     name: "Batata Frita",
-//     price: 1290,
-//     category_id: 3,
-//     offer: true,
-//     file: './src/data/assets/french-fries.png',
-//   },
-//   {
-//     name: "Bacon House",
-//     price: 3290,
-//     category_id: 4,
-//     offer: true,
-//     file: './src/data/assets/second-burger.png',
-//   },
-//   {
-//     name: "Classic Burger",
-//     price: 2490,
-//     category_id: 4,
-//     offer: true,
-//     file: './src/data/assets/appe_1.png',
-//   },
+
